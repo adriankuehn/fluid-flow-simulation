@@ -1,16 +1,35 @@
-# fluid-flow-simulation
+# Fluid Flow Simulation
 Development of a graphical software for the calculation of the drag coefficient by  means of a fluid flow simulation around a scanned 3D body and comparison to the actual results of a  self-deployed wind tunnel
 
-General Summary and Introduction from paper
-Some nice screenshots from paper
+## Introduction:
+Every form of mobility on our planet depends on its level of efficiency. This is how we transferred the aerodynamic properties of penguins and seals to our cars, trains and planes. But we also need to understand the principle behind the motion of a solid through a fluid in order to advance our technique. The decisive factor here is the consideration of the drag coefficient, also known as the Cw-value. Investigations of this degree of aerodynamic slippage of a body are currently carried out in wind tunnels. But these systems are expensive and maintenance is difficult. So we asked ourselves whether these examinations could alternatively be carried out with the help of appropriate software. In our seminar paper we want to create a program that makes it possible to analyze flows around bodies using a virtual wind tunnel. For this we have to deal with the basic physical and mathematical models of fluid dynamics. We then plan to transfer these models to a numerically feasible simulation method. In this method, it is important to define the specifications of our virtual wind tunnel as well as variables that can be analyzed. Finally, we can calibrate our simulation on standard bodies. With our program it should be possible to import three-dimensional objects. For this purpose, the physical properties of the fluid flowing around are defined and inserted into a corresponding simulation space. A simulation is then carried out in which the fluid flows around the body. Here, as the core of our work, specific data is collected, which we can later use to deduce the Cw value of the body. Finally, we want to implement a visualization of the flow that is as comprehensive as possible and illustrate the collected data. We chose this topic ourselves because we are very interested in flow problems, especially in technology. With our program it should be possible for hobbyists or students to examine objects with regard to their aerodynamic properties.
+<br /><br />
+![Screenshot_1](https://github.com/adriankuehn/fluid-flow-simulation/blob/main/Screenshots/Cup.png)
+<br /><br />
+![Screenshot_3](https://github.com/adriankuehn/fluid-flow-simulation/blob/main/Screenshots/Screenshot_Programm.png)
+<br /><br />
+![Screenshot_2](https://github.com/adriankuehn/fluid-flow-simulation/blob/main/Screenshots/windtunnel.jpg)
+<br /><br />
+![Screenshot_4](https://github.com/adriankuehn/fluid-flow-simulation/blob/main/Screenshots/Step_3100.png)
+<br /><br />
 
-Link Paper
+The above text excerpts and screenshots are part of our final course paper (11th & 12th year at high school). You can read and download the entire paper at the following links:
+<br /><br />
+<a href="https://comet-messenger.com">Seminarfacharbeit_Original_Version_Deutsch</a> <br />
+<a href="https://comet-messenger.com">Final_Course_Paper_Translated_Version_English</a>
+
+## Conclusion
+With our program we have developed a realistic and clear flow simulation for bodies, with which the flow behavior of a body can be examined in a user-friendly manner.
+Our animation of the flowing fluids is in no way inferior to the flow images in the wind tunnel. On the contrary, it is even more descriptive and informative since it includes multiple perspectives and different forms of representation. In the wind tunnel, the depiction of flow is limited to a few colored flow stripes that run around the body. Furthermore, we can achieve extremely precise calculation results, which have an error rate of only 5% in the range of Cw values between 0.25 and 1.2. Inaccuracies occur outside of this range. The software should not be used directly here. The conditions mentioned in Chapter 4.4 must be taken into account. Our software cannot yet completely replace the wind tunnel. Furthermore, our software is practical. With a 3D scanner you can simply scan in the desired objects, align them with Blender and have our software calculate the drag coefficient. If the objects do not exist physically but only on the computer in .ob j format, they can still be imported. Ultimately, using our software is a lot more efficient than using a wind tunnel. On the one hand, our software is more accurate in this area than the wind tunnel we tested at the student research center, which is one of the highest-quality wind tunnels that is privately available. On the other hand, it is
+also more time-saving, because scanning and calculating the Cw value takes a maximum of 30 minutes. Based on experience, scanning the body and aligning it with Blender takes an average of 5 to 10 minutes. For the calculation of the Cw value, around 7 minutes are to be planned for a cube accuracy of 14 and around 20 minutes for a cube
+accuracy of 20. Finding a wind tunnel that is the right size and with the desired level of accuracy can take days and can quickly cost hundreds of thousands. Hence we have developed a complete solution that anyone can use to determine the drag coefficient of a body easily, quickly and with little effort. Due to the flexibility of the 3D scanner, both large and small objects can be calculated that would not fit in the wind tunnel or are too small for it. This makes our complete solution suitable for almost everyone, from simple hobbyists at home to physics teachers in class.
 
 
 
-Instructions for local deployment:
 
-See Screenshot
-Run Programm in python Idle, Pycharm does not support tkinter, for deployment in pycharm you need to add tk.mainloop()
+## Instructions for local deployment:
+You can run the repository by executing the code from "Programm.py". However, keep in mind that this code only works in the inbuild python Idle (3.x). Pycharm, for example, does not support the interactive Tkinter GUI. For deployment in Pycharm you need to add the command "tk.mainloop()" in order to make the GUI visible.
 
-addd plus new proprojects, add parameters and then run => red line is cw-value (drag coefficient), remember that in screenshot cw-value is not contstant because of vortoice drag behind body, only at beginning when flow is straight, see instruction in code in line 300
+When you execute the code, you will see the empty GUI with a plus button on the top right. After pressing the plus button the porject window will pop up. First, you have to import a body (3D-shape in .obj format) from the folder "bodies/". After that you can specify the "simulation room" by pressing "factor übernehmen". Recommended are vYh-values from 1,6 to 2,7. Then you specify the parameter values for "Fließgeschwindigkeit" (velocity) and "Viskosität" (viscosity). You also have to press "Strömungsbild erstellen" and insert some values for "Simulationszyklen" (Number of simulation steps, 2000-3000 recommended). Finally you click "Start" and the fluid flow simulation will start for about 3-5 minutes depending on the number of simulations steps chosen. The GUI will plot two figures which contains blue arrows and a 3d-grid color scheme which depict the velocity and the direction of the fluid flow at each point in the simulation room. The red line in left bottom graph describes the Cw-value (drag coefficient). 
+
+The following is also mentioned in the code in line 660: """ If you want to see vortex drag behind the body you have to comment out one of the last lines of the streaming step (Strömungsschritt) in order to create a imbalance in the system, otherwise the fluid flow will stay straight. If you choose a theoretical Reynold Number of above 20 (e.g.: Velocity = 0.24, Viscosity = 0.01) you can see the vortices after roughly 2000 simulation steps (3-5 min calculation time). However, keep in mind that as soon as the vortices appear in the simulation the determination of the drag coefficient does not work anymore. """ This can be seen in the screenshot of the program above. At the beginning during the first 500 simulations steps (when the fluid flow does not have any vortices) the Cw-value (red line) is constant at 0.34 which is correct compared to the real world value. After that the vortices appear and the drag coefficient rapidly increases. 
